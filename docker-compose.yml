@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  db:
+    # platform: linux/amd64
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DCIM_PLUS_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DCIM_PLUS_MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${DCIM_PLUS_MYSQL_USER}
+      MYSQL_PASSWORD: ${DCIM_PLUS_MYSQL_PASSWORD}
+      MYSQL_MAX_ALLOWED_PACKET: 512M
+    restart: unless-stopped
+    ports:
+      - "${DCIM_PLUS_MYSQL_PORT}:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+  pma:
+    # platform: linux/amd64
+    image: phpmyadmin:latest
+    container_name: pma
+    environment:
+      PMA_HOST: db
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 512M
+    restart: always
+    ports:
+      - 8081:80
+    links:
+      - db
+volumes:
+  dbdata:
