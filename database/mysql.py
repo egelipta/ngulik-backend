@@ -29,6 +29,7 @@ DB_ORM_CONFIG = {
         "base": {"models": ["models.base"], "default_connection": "base"},
         "tugas": {"models": ["models.tugas"], "default_connection": "base"},
         "heat_map": {"models": ["models.heat_map"], "default_connection": "base"},
+        "rack_server": {"models": ["models.rack_server"], "default_connection": "base"},
 
 
 

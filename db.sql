@@ -169,11 +169,30 @@ CREATE TABLE `tugas` (
 DROP TABLE IF EXISTS `heat_map`;
 CREATE TABLE `heat_map` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `d` varchar(500) DEFAULT NULL,
   `floor` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='heat_map table';
+
+
+--
+-- Table structure for table `tugas`
+--
+DROP TABLE IF EXISTS `rack_server`;
+CREATE TABLE `rack_server` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT 'Created at',
+  `update_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT 'Updated at',
+  `name` varchar(255) DEFAULT NULL,
+  `width` int(11) NOT NULL,
+  `height` int(11) NOT NULL,
+  `depth` int(11) NOT NULL,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `z` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='rack_server table';
 
 
 
