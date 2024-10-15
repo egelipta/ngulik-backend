@@ -194,5 +194,17 @@ CREATE TABLE `rack_server` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='rack_server table';
 
-
+--
+-- Table structure for table `tugas`
+--
+DROP TABLE IF EXISTS `workfloweditor`;
+CREATE TABLE `workfloweditor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT 'Created at',
+  `update_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT 'Updated at',
+  `name` varchar(255) DEFAULT NULL,
+  `nodesjson` json DEFAULT NULL,
+  `edgesjson` json DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='workfloweditor table';
 
