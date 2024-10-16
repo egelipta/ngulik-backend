@@ -16,11 +16,11 @@ DB_ORM_CONFIG = {
         "base": {
             'engine': 'tortoise.backends.mysql',
             "credentials": {
-                'host': os.getenv('DCIM_PLUS_MYSQL_HOST', 'localhost'),
-                'user': os.getenv('DCIM_PLUS_MYSQL_USER', 'root'),
-                'password': os.getenv('DCIM_PLUS_MYSQL_PASSWORD', 'rahasia123'),
-                'port': os.getenv('DCIM_PLUS_MYSQL_PORT', 3306),
-                'database': os.getenv('DCIM_PLUS_MYSQL_DATABASE_NAME', 'backend_db'),
+                'host': os.getenv('NGULIK_MYSQL_HOST', 'localhost'),
+                'user': os.getenv('NGULIK_MYSQL_USER', 'root'),
+                'password': os.getenv('NGULIK_MYSQL_PASSWORD', 'rahasia123'),
+                'port': os.getenv('NGULIK_MYSQL_PORT', 3307),
+                'database': os.getenv('NGULIK_MYSQL_DATABASE_NAME', 'ngulik_db'),
             }
         }
 
@@ -30,15 +30,7 @@ DB_ORM_CONFIG = {
         "tugas": {"models": ["models.tugas"], "default_connection": "base"},
         "heat_map": {"models": ["models.heat_map"], "default_connection": "base"},
         "rack_server": {"models": ["models.rack_server"], "default_connection": "base"},
-
-
-
-
-
-
-
-
-
+        "workfloweditor": {"models": ["models.workfloweditor"], "default_connection": "base"},
     },
     'use_tz': True,
     'timezone': 'Asia/Jakarta'
