@@ -81,3 +81,17 @@ async def workfloweditor_add(post: CreateWorkflowEditor):
     
     return success(msg=f"{create_workfloweditor.name} Success")
 
+
+@router.delete("/del-data", summary="Delete Data", 
+# dependencies=[Security(check_permissions, scopes=["workfolweditor_delete"])]
+)
+async def workfolweditor_del(req: Request, id: int):
+    """
+    WorkflowEditor Delete
+    :param req:
+    :return:
+    """
+    del_action = await WorkflowEditor.filter(pk=id).delete()
+    if not del_action:
+        return fail(msg=f"Gagal dihapus! {id}!")
+    return success(msg="Berhasil dihapus!")
