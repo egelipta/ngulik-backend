@@ -12,8 +12,8 @@ from schemas.base import BaseResp, ResAntTable
 
 class CreateWorkflowEditor(BaseModel):
     name: str = Field(max_length=255)
-    nodesjson: List[str] = Field(max_length=5000)
-    edgesjson: List[str] = Field(max_length=5000)
+    nodesjson: List[dict] = Field(default_factory=list)
+    edgesjson: List[dict] = Field(default_factory=list)
     
 class UpdateWorkflowEditor(CreateWorkflowEditor):
     id: int
