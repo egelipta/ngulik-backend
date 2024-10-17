@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional
 from core.Response import success, fail, res_antd
 from models.workfloweditor import WorkflowEditor
 from schemas import workfloweditor
-from schemas.workfloweditor import CreateWorkflowEditor  # Sesuaikan path ini dengan struktur proyek Anda
+from schemas.workfloweditor import CreateWorkflowEditor, UpdateWorkflowEditor
 from fastapi import HTTPException, Request, Query, APIRouter
 from tortoise.queryset import F
 import json
@@ -95,3 +95,21 @@ async def workfolweditor_del(req: Request, id: int):
     if not del_action:
         return fail(msg=f"Gagal dihapus! {id}!")
     return success(msg="Berhasil dihapus!")
+
+
+@router.put("/update-data", summary="Update Data",
+# dependencies=[Security(check_permissions, scopes=["workfloweditor_update"])]
+)
+async def workfloweditor_update(post: UpdateWorkflowEditor):
+    """
+    Update workfloweditor
+    :param post:
+    :return:
+    """
+    workfloweditor_check = await WorkflowEditor.get_or_none(pk=post.id)
+    if not workfloweditor_check:
+        return fail(msg="WorkflowEditor tidak ada")
+    data = post.dict()
+    data.pop("id")
+    await WorkflowEditor.filter(pk=post.id).update(**data)
+    return success(msg=f"Berhasil diubah!")
