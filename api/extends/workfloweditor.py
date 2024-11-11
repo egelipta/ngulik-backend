@@ -74,12 +74,12 @@ async def workfloweditor_add(post: CreateWorkflowEditor):
     :param post: Create Workflow Editor
     :return:
     """
-    create_workfloweditor = await WorkflowEditor.create(**post.dict())
+    create_action = await WorkflowEditor.create(**post.dict())
     
-    if not create_workfloweditor:
+    if not create_action:
         return fail(msg=f"Failed {post.name}!")
     
-    return success(msg=f"{create_workfloweditor.name} Success")
+    return success(msg=f"{create_action.name} Berhasil ditambahkan")
 
 
 @router.delete("/del-data", summary="Delete Data", 
@@ -106,10 +106,17 @@ async def workfloweditor_update(post: UpdateWorkflowEditor):
     :param post:
     :return:
     """
-    workfloweditor_check = await WorkflowEditor.get_or_none(pk=post.id)
-    if not workfloweditor_check:
+    update_action = await WorkflowEditor.get_or_none(pk=post.id)
+    if not update_action:
         return fail(msg="WorkflowEditor tidak ada")
     data = post.dict()
     data.pop("id")
     await WorkflowEditor.filter(pk=post.id).update(**data)
-    return success(msg=f"Berhasil diubah!")
+    return success(msg=f"{update_action.name} Berhasil diubah!")
+
+
+@router.get("/get-all-data", summary="Get All Data")
+async def workfloweditor():
+    data = await WorkflowEditor.all().order_by('-create_time').values("id", "name", "create_time", "update_time")
+    return data
+
