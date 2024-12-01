@@ -208,3 +208,16 @@ CREATE TABLE `workfloweditor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='workfloweditor table';
 
+
+--
+-- Table structure for table `tugas`
+--
+DROP TABLE IF EXISTS `homeassistant`;
+CREATE TABLE `homeassistant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT 'Created at',
+  `update_time` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT 'Updated at',
+  `datachart` json DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='homeassistant table';
+
