@@ -31,6 +31,7 @@ DB_ORM_CONFIG = {
         "heat_map": {"models": ["models.heat_map"], "default_connection": "base"},
         "rack_server": {"models": ["models.rack_server"], "default_connection": "base"},
         "workfloweditor": {"models": ["models.workfloweditor"], "default_connection": "base"},
+        "home_assistant": {"models": ["models.home_assistant"], "default_connection": "base"},
     },
     'use_tz': True,
     'timezone': 'Asia/Jakarta'
