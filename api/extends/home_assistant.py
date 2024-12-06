@@ -19,7 +19,7 @@ router = APIRouter(prefix='/homeassistant')
 
 @router.get("/get-data", summary="Get All Data")
 async def get_all_data():
-    data = await HomeAssistant.all().order_by('-create_time')
+    data = await HomeAssistant.all().order_by('-update_time')
     return data
 
 @router.post("/add-data", summary="Add Data")
@@ -35,3 +35,36 @@ async def home_assistant_add(post: CreateHomeAssistant):
         return fail(msg=f"Failed {post.id}!")
     
     return success(msg=f"{create_action.id} Berhasil ditambahkan")
+
+
+@router.put("/update-data", summary="Update Data",
+# dependencies=[Security(check_permissions, scopes=["workfloweditor_update"])]
+)
+async def home_assistant_update(post: UpdateHomeAssistant):
+    """
+    Update home_assistant
+    :param post:
+    :return:
+    """
+    update_action = await HomeAssistant.get_or_none(pk=post.id)
+    if not update_action:
+        return fail(msg="Data tidak ada")
+    data = post.dict()
+    data.pop("id")
+    await HomeAssistant.filter(pk=post.id).update(**data)
+    return success(msg=f"Data Berhasil diubah!")
+
+
+@router.delete("/del-data", summary="Delete Data", 
+# dependencies=[Security(check_permissions, scopes=["home_assistant_delete"])]
+)
+async def home_assistant_del(req: Request, id: int):
+    """
+    HomeAssistant Delete
+    :param req:
+    :return:
+    """
+    del_action = await HomeAssistant.filter(pk=id).delete()
+    if not del_action:
+        return fail(msg=f"Gagal dihapus! {id}!")
+    return success(msg="Berhasil dihapus!")
